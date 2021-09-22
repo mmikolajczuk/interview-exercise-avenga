@@ -10,6 +10,13 @@ import java.math.RoundingMode;
 import static org.junit.jupiter.api.Assertions.*;
 import static pl.mmikolajczuk.interviewexercise.restapi.service.UnitConverter.*;
 
+/**
+ * The testing class for {@code CalculationService}.
+ *
+ * @author Maciej Mikolajczuk
+ * @version 1.0
+ */
+
 @SpringBootTest
 class CalculationServiceTest {
 
@@ -17,7 +24,7 @@ class CalculationServiceTest {
     private CalculationService calculationService;
 
     @Test
-    void shouldGetSum(){
+    void shouldGetSum() {
         //given
         BigDecimal term1 = BigDecimal.ZERO;
         BigDecimal term2 = BigDecimal.ONE;
@@ -31,7 +38,7 @@ class CalculationServiceTest {
     }
 
     @Test
-    void shouldGetDifference(){
+    void shouldGetDifference() {
         //given
         BigDecimal term1 = BigDecimal.ONE;
         BigDecimal term2 = BigDecimal.ONE;
@@ -45,7 +52,7 @@ class CalculationServiceTest {
     }
 
     @Test
-    void shouldGetProduct(){
+    void shouldGetProduct() {
         //given
         BigDecimal factor1 = BigDecimal.ONE;
         BigDecimal factor2 = BigDecimal.ONE;
@@ -59,7 +66,7 @@ class CalculationServiceTest {
     }
 
     @Test
-    void shouldGetFraction(){
+    void shouldGetFraction() {
         //given
         BigDecimal divident = BigDecimal.ONE;
         BigDecimal divisor = BigDecimal.ONE;

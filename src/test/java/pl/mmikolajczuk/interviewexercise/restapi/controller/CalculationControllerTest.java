@@ -16,6 +16,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+/**
+ * The testing class for {@code CalculationController}.
+ *
+ * @author Maciej Mikolajczuk
+ * @version 1.0
+ */
+
 @SpringBootTest
 @AutoConfigureMockMvc
 class CalculationControllerTest {
@@ -41,7 +48,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getSumMissingFirstParam() throws Exception {
+    void shouldGetNotFoundWhenGetSumMissingFirstParam() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/sums/" + "m/" + BigDecimal.ZERO + "/m" + "/m"))
@@ -52,7 +59,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getSumWrongParamTypes() throws Exception {
+    void shouldGetNotFoundWhenGetSumWrongParamTypes() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/sums/" + "t/" + "t/" + BigDecimal.ZERO + "/1a"
@@ -64,7 +71,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getSumWrongParamTypes2() throws Exception {
+    void shouldGetBadRequestWhenGetSumWrongParamTypes() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/sums/" + "m/" + BigDecimal.ZERO + "/1a" + "/m" + "/m"))
@@ -75,7 +82,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getSumToManyParams() throws Exception {
+    void shouldGetNotFoundWhenGetSumToManyParams() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/sums/" + BigDecimal.ZERO + "/m/" + BigDecimal.ZERO + "/m"
@@ -102,7 +109,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getDifferenceMissingSecondParam() throws Exception {
+    void shouldGetNotFoundWhenGetDifferenceMissingSecondParam() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/differences/" + BigDecimal.ONE + "/" + BigDecimal.ONE
@@ -129,7 +136,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getProductMissingThirdParam() throws Exception {
+    void shouldGetNotFoundWhenGetProductMissingThirdParam() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/products/" + BigDecimal.ONE + "/m/" + "m" + "/m"))
@@ -155,7 +162,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getFractionMissingLastParam() throws Exception {
+    void shouldGetNotFoundWhenGetFractionMissingLastParam() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN + "/m/" + BigDecimal.TEN + "/m"))
@@ -166,7 +173,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getFractionMissing2LastParams() throws Exception {
+    void shouldGetNotFoundWhenGetFractionMissing2LastParams() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN + "/m/" + BigDecimal.TEN))
@@ -177,7 +184,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getFractionMissing3Params() throws Exception {
+    void shouldGetNotFoundWhenGetFractionMissing3Params() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN + "/m/"))
@@ -188,7 +195,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getFractionMissing4Params() throws Exception {
+    void shouldGetNotFoundWhenGetFractionMissing4Params() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN))
@@ -199,7 +206,7 @@ class CalculationControllerTest {
     }
 
     @Test
-    void getFractionMissingParams() throws Exception {
+    void shouldGetNotFoundWhenGetFractionMissingParams() throws Exception {
         //given
         //when
         mockMvc.perform(get("/calculations/fractions/"))

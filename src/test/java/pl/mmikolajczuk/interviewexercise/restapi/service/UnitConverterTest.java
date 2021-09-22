@@ -7,6 +7,13 @@ import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 import static pl.mmikolajczuk.interviewexercise.restapi.service.UnitConverter.Unit.*;
 
+/**
+ * The testing class for  {@code UnitConverter}.
+ *
+ * @author Maciej Mikolajczuk
+ * @version 1.0
+ */
+
 class UnitConverterTest {
 
     @Test
@@ -99,7 +106,7 @@ class UnitConverterTest {
         //when
         BigDecimal result = UnitConverter.convert(BigDecimal.valueOf(input), ft, m);
         //then
-        assertEquals(result,BigDecimal.valueOf(input).multiply(BigDecimal.valueOf(UnitConverter.FEET_TO_METERS)));
+        assertEquals(result, BigDecimal.valueOf(input).multiply(BigDecimal.valueOf(UnitConverter.FEET_TO_METERS)));
     }
 
     @Test
