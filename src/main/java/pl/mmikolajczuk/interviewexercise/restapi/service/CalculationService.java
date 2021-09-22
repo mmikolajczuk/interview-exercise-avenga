@@ -16,7 +16,7 @@ public class CalculationService {
 
     public BigDecimal getDifference(){
 
-        return BigDecimal.ONE;
+        return BigDecimal.ZERO;
     }
 
     public BigDecimal getProduct(){

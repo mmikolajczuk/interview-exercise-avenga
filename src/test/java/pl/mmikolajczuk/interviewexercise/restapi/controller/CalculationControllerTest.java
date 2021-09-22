@@ -29,7 +29,8 @@ class CalculationControllerTest {
     void shouldGetSum() throws Exception {
         //given
         //when
-        MvcResult mvcResult = mockMvc.perform(get("/calculations/sums/"))
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/sums/" + BigDecimal.ZERO + "/m/" +
+                        BigDecimal.ZERO + "/m" + "/m"))
                 .andDo(print())
                 .andExpect(status().is(200))
                 .andReturn();
@@ -40,24 +41,86 @@ class CalculationControllerTest {
     }
 
     @Test
+    void getSumMissingFirstParam() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/sums/" + "m/" +
+                        BigDecimal.ZERO + "/m" + "/m"))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
+    }
+
+    @Test
+    void getSumWrongParamTypes() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/sums/" + "t/" + "t/" +
+                        BigDecimal.ZERO + "/1a" + Integer.MAX_VALUE))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
+    }
+
+    @Test
+    void getSumWrongParamTypes2() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/sums/" + "m/" +
+                        BigDecimal.ZERO + "/1a" + "/m" + "/m"))
+                .andDo(print())
+                .andExpect(status().is(400))
+                .andReturn();
+        //then
+    }
+
+    @Test
+    void getSumToManyParams() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/sums/" + BigDecimal.ZERO + "/m/" +
+                        BigDecimal.ZERO + "/m" + "/m/" + BigDecimal.ZERO))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
+    }
+
+    @Test
     void shouldGetDifference() throws Exception {
         //given
         //when
-        MvcResult mvcResult = mockMvc.perform(get("/calculations/differences/"))
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/differences/" + BigDecimal.ONE + "/m/" +
+                        BigDecimal.ONE + "/m" + "/m"))
                 .andDo(print())
                 .andExpect(status().is(200))
                 .andReturn();
         //then
         BigDecimal result = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), BigDecimal.class);
         assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(BigDecimal.ONE);
+        assertThat(result).isEqualTo(BigDecimal.ZERO);
+    }
+
+    @Test
+    void getDifferenceMissingSecondParam() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/differences/" + BigDecimal.ONE + "/" +
+                        BigDecimal.ONE + "/m" + "/m"))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
     }
 
     @Test
     void shouldGetProduct() throws Exception {
         //given
         //when
-        MvcResult mvcResult = mockMvc.perform(get("/calculations/products/"))
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/products/" + BigDecimal.ONE + "/m/" +
+                        BigDecimal.TEN + "/m" + "/m"))
                 .andDo(print())
                 .andExpect(status().is(200))
                 .andReturn();
@@ -68,10 +131,23 @@ class CalculationControllerTest {
     }
 
     @Test
+    void getProductMissingThirdParam() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/products/" + BigDecimal.ONE + "/m/" +
+                        "m" + "/m"))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
+    }
+
+    @Test
     void shouldGetFraction() throws Exception {
         //given
         //when
-        MvcResult mvcResult = mockMvc.perform(get("/calculations/fractions/"))
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN + "/m/" +
+                        BigDecimal.TEN + "/m" + "/m"))
                 .andDo(print())
                 .andExpect(status().is(200))
                 .andReturn();
@@ -79,6 +155,63 @@ class CalculationControllerTest {
         BigDecimal result = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), BigDecimal.class);
         assertThat(result).isNotNull();
         assertThat(result).isEqualTo(BigDecimal.ONE);
+    }
+
+    @Test
+    void getFractionMissingLastParam() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN + "/m/" +
+                        BigDecimal.TEN + "/m"))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
+    }
+
+    @Test
+    void getFractionMissing2LastParams() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN + "/m/" +
+                        BigDecimal.TEN ))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
+    }
+
+    @Test
+    void getFractionMissing3Params() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN + "/m/"  ))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
+    }
+
+    @Test
+    void getFractionMissing4Params() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/fractions/" + BigDecimal.TEN ))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
+    }
+
+    @Test
+    void getFractionMissingParams() throws Exception {
+        //given
+        //when
+        MvcResult mvcResult = mockMvc.perform(get("/calculations/fractions/" ))
+                .andDo(print())
+                .andExpect(status().is(404))
+                .andReturn();
+        //then
     }
 
 }

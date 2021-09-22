@@ -2,8 +2,7 @@ package pl.mmikolajczuk.interviewexercise.restapi.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.mmikolajczuk.interviewexercise.restapi.service.CalculationService;
 
 import java.math.BigDecimal;
@@ -20,23 +19,31 @@ public class CalculationController {
         return "Alive";
     }
 
-    @GetMapping("/calculations/sums/")
-    public BigDecimal getSum(){
+    @GetMapping("/calculations/sums/{term1}/{unit1}/{term2}/{unit2}/{resultUnit}")
+    public BigDecimal getSum(@PathVariable BigDecimal term1, @PathVariable String unit1,
+                             @PathVariable BigDecimal term2, @PathVariable String unit2,
+                             @PathVariable String resultUnit){
         return calculationService.getSum();
     }
 
-    @GetMapping("/calculations/differences/")
-    public BigDecimal getDifference(){
+    @GetMapping("/calculations/differences/{term1}/{unit1}/{term2}/{unit2}/{resultUnit}")
+    public BigDecimal getDifference(@PathVariable BigDecimal term1, @PathVariable String unit1,
+                                    @PathVariable BigDecimal term2, @PathVariable String unit2,
+                                    @PathVariable String resultUnit){
         return calculationService.getDifference();
     }
 
-    @GetMapping("/calculations/products/")
-    public BigDecimal getProduct(){
+    @GetMapping("/calculations/products/{factor1}/{unit1}/{factor2}/{unit2}/{resultUnit}")
+    public BigDecimal getProduct(@PathVariable BigDecimal factor1, @PathVariable String unit1,
+                                 @PathVariable BigDecimal factor2, @PathVariable String unit2,
+                                 @PathVariable String resultUnit){
         return calculationService.getProduct();
     }
 
-    @GetMapping("/calculations/fractions/")
-    public BigDecimal getFraction(){
+    @GetMapping("/calculations/fractions/{divident}/{unit1}/{divisor}/{unit2}/{resultUnit}")
+    public BigDecimal getFraction(@PathVariable BigDecimal divident, @PathVariable String unit1,
+                                  @PathVariable BigDecimal divisor, @PathVariable String unit2,
+                                  @PathVariable String resultUnit){
         return calculationService.getFraction();
     }
 }

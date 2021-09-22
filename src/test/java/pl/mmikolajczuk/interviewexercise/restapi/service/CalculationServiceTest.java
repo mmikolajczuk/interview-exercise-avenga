@@ -29,7 +29,7 @@ class CalculationServiceTest {
         //when
         BigDecimal result = calculationService.getDifference();
         //then
-        assertEquals(result, BigDecimal.ONE);
+        assertEquals(result, BigDecimal.ZERO);
     }
 
     @Test
