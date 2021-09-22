@@ -37,7 +37,7 @@ class CalculationControllerTest {
         //then
         BigDecimal result = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), BigDecimal.class);
         assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(BigDecimal.ZERO);
+        assertThat(result).isEqualTo(BigDecimal.ONE);
     }
 
     @Test

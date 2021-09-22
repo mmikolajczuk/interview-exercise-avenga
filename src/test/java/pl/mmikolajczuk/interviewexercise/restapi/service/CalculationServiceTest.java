@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static pl.mmikolajczuk.interviewexercise.restapi.service.UnitConverter.*;
 
 @SpringBootTest
 class CalculationServiceTest {
@@ -17,17 +18,27 @@ class CalculationServiceTest {
     @Test
     void shouldGetSum(){
         //given
+        BigDecimal term1 = BigDecimal.ZERO;
+        BigDecimal term2 = BigDecimal.ONE;
+        Unit unit1 = Unit.m;
+        Unit unit2 = Unit.m;
+        Unit resultUnit = Unit.m;
         //when
-        BigDecimal result = calculationService.getSum();
+        BigDecimal result = calculationService.getSum(term1, unit1, term2, unit2, resultUnit);
         //then
-        assertEquals(result, BigDecimal.ZERO);
+        assertEquals(result, BigDecimal.ONE);
     }
 
     @Test
     void shouldGetDifference(){
         //given
+        BigDecimal term1 = BigDecimal.ONE;
+        BigDecimal term2 = BigDecimal.ONE;
+        Unit unit1 = Unit.m;
+        Unit unit2 = Unit.m;
+        Unit resultUnit = Unit.m;
         //when
-        BigDecimal result = calculationService.getDifference();
+        BigDecimal result = calculationService.getDifference(term1, unit1, term2, unit2, resultUnit);
         //then
         assertEquals(result, BigDecimal.ZERO);
     }
@@ -35,8 +46,13 @@ class CalculationServiceTest {
     @Test
     void shouldGetProduct(){
         //given
+        BigDecimal factor1 = BigDecimal.ONE;
+        BigDecimal factor2 = BigDecimal.ONE;
+        Unit unit1 = Unit.m;
+        Unit unit2 = Unit.m;
+        Unit resultUnit = Unit.m;
         //when
-        BigDecimal result = calculationService.getProduct();
+        BigDecimal result = calculationService.getProduct(factor1, unit1, factor2, unit2, resultUnit);
         //then
         assertEquals(result, BigDecimal.TEN);
     }
@@ -44,8 +60,13 @@ class CalculationServiceTest {
     @Test
     void shouldGetFraction(){
         //given
+        BigDecimal divident = BigDecimal.ONE;
+        BigDecimal divisor = BigDecimal.ONE;
+        Unit unit1 = Unit.m;
+        Unit unit2 = Unit.m;
+        Unit resultUnit = Unit.m;
         //when
-        BigDecimal result = calculationService.getFraction();
+        BigDecimal result = calculationService.getFraction(divident, unit1, divisor, unit2, resultUnit);
         //then
         assertEquals(result, BigDecimal.ONE);
     }
