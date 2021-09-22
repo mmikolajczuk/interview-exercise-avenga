@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static pl.mmikolajczuk.interviewexercise.restapi.service.UnitConverter.*;
@@ -26,7 +27,7 @@ class CalculationServiceTest {
         //when
         BigDecimal result = calculationService.getSum(term1, unit1, term2, unit2, resultUnit);
         //then
-        assertEquals(result, BigDecimal.ONE);
+        assertEquals(result, BigDecimal.ONE.setScale(2, RoundingMode.CEILING));
     }
 
     @Test
@@ -40,7 +41,7 @@ class CalculationServiceTest {
         //when
         BigDecimal result = calculationService.getDifference(term1, unit1, term2, unit2, resultUnit);
         //then
-        assertEquals(result, BigDecimal.ZERO);
+        assertEquals(result, BigDecimal.ZERO.setScale(2, RoundingMode.CEILING));
     }
 
     @Test
@@ -54,7 +55,7 @@ class CalculationServiceTest {
         //when
         BigDecimal result = calculationService.getProduct(factor1, unit1, factor2, unit2, resultUnit);
         //then
-        assertEquals(result, BigDecimal.TEN);
+        assertEquals(result, BigDecimal.ONE.setScale(2, RoundingMode.CEILING));
     }
 
     @Test
@@ -68,6 +69,6 @@ class CalculationServiceTest {
         //when
         BigDecimal result = calculationService.getFraction(divident, unit1, divisor, unit2, resultUnit);
         //then
-        assertEquals(result, BigDecimal.ONE);
+        assertEquals(result, BigDecimal.ONE.setScale(2, RoundingMode.CEILING));
     }
 }
